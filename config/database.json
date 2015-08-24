@@ -1,0 +1,9 @@
+/**
+ * Created by thog on 8/24/15.
+ */
+{
+  host: '*****',
+  user: '*****',
+  password: '*****',
+  database: '*****'
+}
