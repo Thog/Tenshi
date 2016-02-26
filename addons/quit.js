@@ -1,12 +1,12 @@
-/**
- * Created by thog on 8/24/15.
- */
+exports.init = function (bot) {
 
-exports.manage = function(bot, from, to, message)
-{
-    if (from.indexOf("Thog") > -1)
-    {
-        bot.say(to, "Bye!");
-        bot.disconnect();
-    }
+    bot.addCommand("quit", function (bot, from, to, message) {
+        if (from.indexOf("Thog") > -1) {
+            bot.say(to, "Bye!");
+            bot.disconnect("Bye!", function () {
+                process.exit(0);
+            });
+        }
+    });
+
 }

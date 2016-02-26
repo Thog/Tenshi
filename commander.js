@@ -17,32 +17,36 @@ function walk(currentDirPath, callback) {
     });
 }
 
-load = function(bot, addonsDir)
+load = function(bot, database, addonsDir)
 {
-    console.log("Loading commands...");
+    console.log("Loading modules...");
     walk(addonsDir , function(filePath, name)
     {
+        console.log("Loading " + name);
         var mod = require("./" + filePath);
-        bot.addListener('message', function (from, to, message) {
-            if (message.indexOf("!" + name.replace(".js", "")) > -1)
-            {
-                mod.manage(bot, from, to, message)
-            }
-        });
+        mod.init(bot, database);
     });
 };
 
-reload = function(bot, addonDir)
+reload = function(bot, database, addonDir)
 {
-    console.log("Unloading commands...");
-    walk(addonDir, function(filePath, name)
+    try
     {
-        console.log("Unloading " + name);
-        delete require.cache[require.resolve("./" + filePath)];
-    });
-    bot.removeAllListeners('message');
-    load(bot, addonDir);
-    console.log("Reload complete");
+        console.log("Unloading modules...");
+        walk(addonDir, function(filePath, name)
+        {
+            console.log("Unloading " + name);
+            delete require.cache[require.resolve("./" + filePath)];
+        });
+        bot.removeAllListeners('message');
+        load(bot, database, addonDir);
+        console.log("Reload complete");
+    } catch (err)
+    {
+        for (var channel in bot.chans)
+            bot.say(channel, "Error: " + err.message);
+        console.error(err.stack);
+    }
 }
 
 exports.load = load;

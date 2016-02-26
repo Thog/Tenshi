@@ -3,8 +3,10 @@
  */
 
 
-exports.manage = function(bot, from, to, message)
-{
-    var commander = require("../commander");
-    commander.reload(bot, "addons");
+exports.init = function (bot) {
+    bot.addCommand("reload", function (bot, from, to, message) {
+        if (from.indexOf("Thog") > -1) {
+            bot.reload();
+        }
+    });
 }

@@ -1,6 +1,5 @@
-
-
-exports.manage = function(bot, from, to, message)
-{
-    console.log("TELL CALLED 3");
+exports.init = function (bot, database) {
+    bot.addCommand("tell", function (bot, from, to, message) {
+        console.log(message);
+    });
 }
