@@ -16,7 +16,7 @@ exports.init = function (bot) {
                 if (!error && response.statusCode == 200) {
                     var $ = cheerio.load(html);
                     if ($("title").text() != null) {
-                        bot.say(to, util.format("[ %s ] - %s", $("title").text(), urlModule.parse(url[0]).hostname));
+                        bot.say(to == bot.nick ? from : to, util.format("[ %s ] - %s", $("title").text(), urlModule.parse(url[0]).hostname));
                     }
                 }
             });

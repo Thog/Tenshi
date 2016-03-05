@@ -1,6 +1,14 @@
+/*
+    Get the top of a stack
+ */
+if (!Array.prototype.top) {
+    Array.prototype.top = function top() {
+        return this[this.length - 1];
+    };
+}
 var irc = require('irc');
 var bot = new irc.Client('insanity.esper.net', 'Tenshi', {
-    channels: ['#vader'],
+    channels: ['#sapphire'],
     userName: "Kanade",
     realName: "Kanade Tachibana",
     debug: false,
