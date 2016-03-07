@@ -46,12 +46,12 @@ function brainfuck(code, stack_size, cb) {
                     loop_count = 0;
                     i--;
                     while (i > 0) {
-                        if (code == ']')
+                        if (code[i] == ']')
                             loop_count++;
                         else if (code[i] == '[' && loop_count == 0)
                             break;
                         else if (code[i] == '[')
-                            loop_count++;
+                            loop_count--;
                         i--;
                     }
                 }
