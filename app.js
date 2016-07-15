@@ -7,11 +7,11 @@ if (!Array.prototype.top) {
     };
 }
 var irc = require('irc');
-var bot = new irc.Client('insanity.esper.net', 'Tenshi', {
-    channels: ['#sapphire'],
+var bot = new irc.Client('irc.esper.net', 'Tenshi', {
+    channels: ['#kanade'],
     userName: "Kanade",
     realName: "Kanade Tachibana",
-    debug: false,
+    debug: true,
     port: 6666
 });
 
@@ -41,6 +41,8 @@ bot.reload = function()
 {
     commander.reload(bot, database, "addons");
 }
+
+bot.startTime = Date.now();
 
 var commander = require('./commander');
 var database = require("./database");
